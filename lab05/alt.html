@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fullscreen Image Example</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* Basic styling for the body */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      position: relative;
+      /* Needed for positioning close icon */
+    }
+
+    /* Initial image styling */
+    #fullscreenImage {
+      width: 300px;
+      /* Initial size */
+      height: auto;
+      transition: transform 0.5s ease;
+      /* Animation for resizing */
+      cursor: pointer;
+      z-index: 1;
+      /* Initial stacking context */
+    }
+
+    /* Fullscreen styles */
+    .fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 999;
+      /* Ensure it appears above other elements */
+      object-fit: cover;
+      /* Cover the entire screen */
+      transition: transform 0.5s ease;
+      /* Smooth transition */
+      transform: scale(1);
+      /* Scale transition */
+    }
+
+    /* Icon styling */
+    .close-icon {
+      position: fixed;
+      /* Fixed positioning for fullscreen */
+      top: 20px;
+      right: 20px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      z-index: 1000;
+      /* Ensure icon is above image */
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Background for better visibility */
+      padding: 10px;
+      /* Padding for click area */
+      border-radius: 50%;
+      /* Rounded background */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="question3">
+    <h1>Question 3</h1>
+    <img id="fullscreenImage" src="./doc-patient1 copy.jpeg" alt="Sample Image">
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $("#fullscreenImage").click(function () {
+        this.requestFullscreen()
+        $(this).addClass("fullscreen");
+
+        const closeIcon = $('<span class="material-icons close-icon">close</span>');
+        $("body").append(closeIcon);
+
+        closeIcon.click(() => {
+          document.exitFullscreen()
+          $("#fullscreenImage").removeClass("fullscreen");
+          closeIcon.remove(); // Remove close icon
+        });
+      })
+    })
+
+
+
+  </script>
+
+</body>
+
+</html>

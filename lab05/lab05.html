@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./lab05.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+  <title>Johan Philip</title>
+</head>
+
+<body>
+  <div class="question1">
+    <h1>Question 1</h1>
+    <form id="question1">
+      <div class="input">
+        <label for="name">Name:</label>
+        <input id="name" type="text" name="name" placeholder="John Doe" required>
+        <p id="name-error"></p>
+      </div>
+      <div class="input">
+        <label for="address">Address:</label>
+        <input id="address" type="text" name="address" placeholder="123 TMU Street, Toronto, Ontario A1B 2C3" required>
+      </div>
+      <div class="input">
+        <label for="phone">Phone Number:</label>
+        <input id="phone" type="tel" name="phone" placeholder="(416) 123-4567" required>
+        <p id="phone-error"></p>
+
+      </div>
+      <div>
+        <button type="button" id="submit-button" onclick="finalDisplay()">Submit</button>
+      </div>
+
+      <div id="display">
+
+      </div>
+
+    </form>
+  </div>
+  <script>
+    function validateForm() {
+      const name = document.getElementById("name").value;
+      const address = document.getElementById("address").value;
+      const phone = document.getElementById("phone").value;
+
+      if (!name) {
+        document.getElementById("name-error").innerText = "You must enter a name"
+        return false
+      } else {
+        const nameExpression = /^[a-zA-Z\s]+$/
+        if (!name.match(nameExpression)) {
+          document.getElementById("name-error").innerText = "Name must only contain letters. Please try again"
+          return false;
+        } else {
+          document.getElementById("name-error").innerText = ""
+        }
+      }
+      if (!phone) {
+        document.getElementById("phone-error").innerText = "You must enter a phone number"
+        return false
+      } else {
+
+
+        const phoneExpression = /^\(\d{3}\) \d{3}-\d{4}$/;
+        if (!phone.match(phoneExpression)) {
+          document.getElementById("phone-error").innerText = "Phone numbers must follow the format: (XXX) XXX-XXXX. Please try again"
+          return false;
+        } else {
+          document.getElementById("phone-error").innerText = ""
+        }
+      }
+      return true;
+    }
+    function numberConvertor(phone) {
+      return phone.replace(/^\((\d{3})\) (\d{3})-(\d{4})$/, "$1-$2-$3");
+    }
+    function finalDisplay() {
+      if (!validateForm()) {
+        return
+      }
+      const name = document.getElementById("name").value;
+      const address = document.getElementById("address").value;
+      const phone = document.getElementById("phone").value;
+      const newPhone = numberConvertor(phone);
+
+      const displayArea = document.getElementById("display");
+      displayArea.innerHTML = `<h2>Contact Information</h2>
+      <p class="display-content"><span>Name: </span> ${name}</p>
+      <p class="display-content"><span>Address: </span> ${address}</p>
+      <p class="display-content"><span>Phone Number:</span> ${newPhone}</p>`;
+    }
+
+  </script>
+  <div class="question2">
+    <h1> Question 2</h1>
+    <div id="question2">
+      <label for="textArea"></label>
+      <textarea id="textArea" oninput="characterCounter()" placeholder="Enter anything..."></textarea>
+      <p id="total-characters">Total Characters: </p>
+      <p id="only-letters">Letters Only: </p>
+    </div>
+    <script>
+      function characterCounter() {
+        const textInput = document.getElementById('textArea')
+
+        const totalNumOfCharacters = textInput.value.length
+        const onlyLetterNumOfCharacters = (textInput.value.match(/\S/g) || []).length;
+
+        const totalCharactersP = document.getElementById("total-characters")
+        const onlyLettersP = document.getElementById("only-letters")
+
+        totalCharactersP.textContent = `Total Characters: ${totalNumOfCharacters}`
+        onlyLettersP.textContent = `Only Letters: ${onlyLetterNumOfCharacters}`
+      }
+    </script>
+  </div>
+
+  <div class="question3">
+    <h1>Question 3</h1>
+    <img id="fullscreenImage" src="./doc-patient1 copy.jpeg" alt="Sample Image">
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $("#fullscreenImage").click(function () {
+        this.requestFullscreen()
+        $(this).addClass("fullscreen");
+
+        const closeIcon = $('<span class="material-icons close-icon">close</span>');
+        $("body").append(closeIcon);
+
+        closeIcon.click(() => {
+          document.exitFullscreen()
+          $("#fullscreenImage").removeClass("fullscreen");
+          closeIcon.remove(); // Remove close icon
+        });
+      })
+    })
+  </script>
+</body>
+
+</html>
