@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problem 2</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      display: flex;
+      place-content: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 600px;
+      font-size: 20px;
+    }
+
+    h1 {
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      border-radius: 10px;
+      padding: 5px 10px;
+    }
+
+    .submit-button {
+      display: flex;
+      justify-content: space-evenly;
+
+      button {
+        background: none;
+        border-radius: 10px;
+        padding: 5px 20px;
+        font-weight: bold;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <form action="../cgi-bin/lab10r.cgi" method="post">
+    <h1>City Information</h1>
+    <div class="input-field">
+      <label for="city">City Name</label>
+      <input type="text" id="city" required />
+    </div>
+    <div class="input-field">
+      <label for="province">Province/State Name</label>
+      <input type="text" id="province" />
+    </div>
+    <div class="input-field">
+      <label for="country">Country Name</label>
+      <input type="text" id="country" />
+    </div>
+    <div class="input-field">
+      <label for="picture-url">URL of City</label>
+      <input type="url" id="picture-url" required />
+    </div>
+    <div class="submit-button">
+      <button type="submit" class="python" formaction="../cgi-bin/lab10p.cgi">Python</button>
+      <button type="submit" class="ruby" formaction="../cgi-bin/lab10r.cgi">Ruby</button>
+    </div>
+  </form>
+</body>
+
+</html>
